@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./src/04fastapi_with_postgresql"
+    ]
+}
