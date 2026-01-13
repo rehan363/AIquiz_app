@@ -76,7 +76,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <BackToTop />
-          <PWAInstaller />
+
         </ErrorBoundary>
       </body>
     </html>
