@@ -1,33 +1,15 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  HelpCircle, 
-  Search, 
-  ArrowRight, 
-  ChevronDown,
-  Bot,
-  BarChart3,
-  Settings,
-  Lightbulb,
+import {
+  HelpCircle,
   Plus,
   Minus
 } from 'lucide-react';
-import Link from 'next/link';
 
 export default function FAQPage() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
   const [openItems, setOpenItems] = useState<string[]>([]);
-
-  const categories = [
-    { id: 'all', label: 'All Questions', icon: HelpCircle },
-    { id: 'ai-generation', label: 'AI & Quiz Generation', icon: Bot },
-    { id: 'quiz-experience', label: 'Quiz Experience', icon: BarChart3 },
-    { id: 'technical', label: 'Technical Support', icon: Settings },
-    { id: 'learning-tips', label: 'Learning Tips', icon: Lightbulb },
-  ];
 
   const faqData = [
     // AI & Quiz Generation
@@ -159,39 +141,11 @@ export default function FAQPage() {
     }
   ];
 
-  const filteredFAQs = useMemo(() => {
-    let filtered = faqData;
-    
-    if (activeCategory !== 'all') {
-      filtered = filtered.filter(faq => faq.category === activeCategory);
-    }
-    
-    if (searchTerm) {
-      filtered = filtered.filter(faq => 
-        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    
-    return filtered;
-  }, [activeCategory, searchTerm]);
-
   const toggleItem = (id: string) => {
-    setOpenItems(prev => 
-      prev.includes(id) 
+    setOpenItems(prev =>
+      prev.includes(id)
         ? prev.filter(item => item !== id)
         : [...prev, id]
-    );
-  };
-
-  const highlightText = (text: string, highlight: string) => {
-    if (!highlight) return text;
-    
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return parts.map((part, index) => 
-      part.toLowerCase() === highlight.toLowerCase() 
-        ? <mark key={index} className="bg-cosmic-accent/30 text-cosmic-accent-light">{part}</mark>
-        : part
     );
   };
 
@@ -207,143 +161,63 @@ export default function FAQPage() {
           <h1 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
             Frequently Asked <span className="text-gradient">Questions</span>
           </h1>
-          
+
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed mb-8">
             Everything you need to know about Quizzly.ai and how our AI-powered quiz generation works.
           </p>
-
-          {/* Search Bar */}
-          <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-muted" />
-            <input
-              type="text"
-              placeholder="Search FAQs..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-cosmic-surface/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-cosmic-primary/50 transition-all"
-            />
-          </div>
-        </motion.div>
-
-        {/* Category Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-cosmic-primary text-white'
-                    : 'glass-panel text-text-secondary hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <category.icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{category.label}</span>
-                <span className="sm:hidden">{category.label.split(' ')[0]}</span>
-              </button>
-            ))}
-          </div>
         </motion.div>
 
         {/* FAQ Items */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.2 }}
           className="max-w-4xl mx-auto mb-16"
         >
-          {filteredFAQs.length === 0 ? (
-            <div className="text-center py-12">
-              <HelpCircle className="w-16 h-16 text-text-muted mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No questions found</h3>
-              <p className="text-text-secondary">
-                Try adjusting your search terms or selecting a different category.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {filteredFAQs.map((faq, index) => (
-                <motion.div
-                  key={faq.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.05 }}
-                  className="glass-card rounded-xl overflow-hidden"
+          <div className="space-y-4">
+            {faqData.map((faq, index) => (
+              <motion.div
+                key={faq.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + index * 0.05 }}
+                className="glass-card rounded-xl overflow-hidden"
+              >
+                <button
+                  onClick={() => toggleItem(faq.id)}
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
                 >
-                  <button
-                    onClick={() => toggleItem(faq.id)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
-                  >
-                    <h3 className="text-lg font-semibold pr-4">
-                      {highlightText(faq.question, searchTerm)}
-                    </h3>
-                    <div className="flex-shrink-0">
-                      {openItems.includes(faq.id) ? (
-                        <Minus className="w-5 h-5 text-cosmic-primary" />
-                      ) : (
-                        <Plus className="w-5 h-5 text-text-muted" />
-                      )}
-                    </div>
-                  </button>
-                  
-                  <AnimatePresence>
-                    {openItems.includes(faq.id) && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-4 border-t border-white/10">
-                          <p className="text-text-secondary leading-relaxed pt-4">
-                            {highlightText(faq.answer, searchTerm)}
-                          </p>
-                        </div>
-                      </motion.div>
+                  <h3 className="text-lg font-semibold pr-4">
+                    {faq.question}
+                  </h3>
+                  <div className="flex-shrink-0">
+                    {openItems.includes(faq.id) ? (
+                      <Minus className="w-5 h-5 text-cosmic-primary" />
+                    ) : (
+                      <Plus className="w-5 h-5 text-text-muted" />
                     )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </motion.div>
+                  </div>
+                </button>
 
-        {/* Contact Support */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="text-center"
-        >
-          <div className="glass-card p-12 rounded-2xl max-w-2xl mx-auto">
-            <HelpCircle className="w-16 h-16 text-cosmic-primary mx-auto mb-6" />
-            <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
-            <p className="text-text-secondary mb-8 leading-relaxed">
-              Can't find what you're looking for? Our support team is here to help you get the most out of Quizzly.ai.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="mailto:support@quizzly.ai"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cosmic-primary/25 transition-all duration-300"
-              >
-                Contact Support
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 px-6 py-3 glass-panel text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300"
-              >
-                Try Quizzly.ai
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+                <AnimatePresence>
+                  {openItems.includes(faq.id) && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-4 border-t border-white/10">
+                        <p className="text-text-secondary leading-relaxed pt-4">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

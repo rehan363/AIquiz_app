@@ -1,166 +1,305 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { quizApi } from '@/lib/api';
-import QuizRoom from '@/components/QuizRoom';
-import FinalizeForm from '@/components/FinalizeForm';
-import ResultView from '@/components/ResultView';
-import { 
-  Sparkles, 
-  BrainCircuit, 
-  Search, 
-  ArrowRight, 
-  Loader2
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
+    ArrowRight,
+    BrainCircuit,
+    Sparkles,
+    Type,
+    Lightbulb,
+    CheckCircle,
+    Cpu,
+    Target,
+    Zap,
+    Shield,
+    Globe
 } from 'lucide-react';
+import Link from 'next/link';
+import Footer from '@/components/Footer';
 
-type QuizState = 'START' | 'QUIZ' | 'FINALIZE' | 'RESULT';
+export default function LandingPage() {
+    const processSteps = [
+        {
+            number: "01",
+            icon: Type,
+            title: "Enter Your Topic",
+            description: "Type any subject you want to learn",
+            details: [
+                "From 'Machine Learning' to 'Ancient History'",
+                "Natural language understanding",
+                "Smart topic analysis",
+                "Context-aware processing"
+            ],
+            color: "from-cosmic-primary to-cosmic-primary-light"
+        },
+        {
+            number: "02",
+            icon: BrainCircuit,
+            title: "AI Creates Your Quiz",
+            description: "Google ADK analyzes your topic",
+            details: [
+                "Generates 5 custom MCQ questions",
+                "Tailored difficulty levels",
+                "Educational best practices",
+                "Instant content generation"
+            ],
+            color: "from-cosmic-secondary to-cosmic-secondary-light"
+        },
+        {
+            number: "03",
+            icon: CheckCircle,
+            title: "Learn Interactively",
+            description: "Take your personalized quiz",
+            details: [
+                "Real-time feedback and explanations",
+                "Progress tracking",
+                "Immediate score calculation",
+                "Adaptive learning insights"
+            ],
+            color: "from-cosmic-accent to-cosmic-accent-light"
+        }
+    ];
 
-export default function Home() {
-  const [state, setState] = useState<QuizState>('START');
-  const [topic, setTopic] = useState('');
-  const [sessionId, setSessionId] = useState<number | null>(null);
-  const [result, setResult] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+    const techStack = [
+        {
+            icon: BrainCircuit,
+            name: "Google ADK",
+            description: "Agent Development Kit for AI orchestration"
+        },
+        {
+            icon: Zap,
+            name: "OpenRouter LLM",
+            description: "Advanced language model integration"
+        },
+        {
+            icon: Cpu,
+            name: "Real-time Processing",
+            description: "Instant quiz generation and validation"
+        },
+        {
+            icon: Shield,
+            name: "Secure Architecture",
+            description: "Privacy-focused data handling"
+        }
+    ];
 
-  const startQuiz = async () => {
-    if (!topic) return;
-    setLoading(true);
-    try {
-      const res = await quizApi.generate(topic);
-      setSessionId(res.data.session_id);
-      setState('QUIZ');
-    } catch (error) {
-      console.error('Failed to start quiz', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const features = [
+        {
+            icon: Target,
+            title: "Personalized Learning",
+            description: "AI adapts to your knowledge level and learning style"
+        },
+        {
+            icon: Zap,
+            title: "Instant Generation",
+            description: "Get custom quizzes in seconds, not hours"
+        },
+        {
+            icon: Globe,
+            title: "Any Topic",
+            description: "From quantum physics to cooking - we cover it all"
+        },
+        {
+            icon: BrainCircuit,
+            title: "Smart Explanations",
+            description: "Learn from mistakes with detailed explanations"
+        }
+    ];
 
-  const handleQuizComplete = () => {
-    setState('FINALIZE');
-  };
+    return (
+        <div className="min-h-screen pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Hero Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-20"
+                >
+                    <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-cosmic-accent text-sm font-bold">
+                        <Sparkles className="w-4 h-4" />
+                        AI-Powered Quiz Generation
+                    </div>
 
-  const handleFinalResult = (data: any) => {
-    setResult(data);
-    setState('RESULT');
-  };
+                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+                        Learn <span className="text-gradient">Smarter</span>,<br />
+                        Not Harder
+                    </h1>
 
-  const resetAll = () => {
-    setState('START');
-    setTopic('');
-    setSessionId(null);
-    setResult(null);
-  };
+                    <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed mb-8">
+                        Transform any topic into interactive quizzes in seconds.
+                        AI-powered learning that adapts to you, making education more effective and engaging.
+                    </p>
 
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4 pt-20 sm:p-6 sm:pt-24 relative z-10">
-      <AnimatePresence mode="wait">
-        {state === 'START' && (
-          <motion.div
-            key="start"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center max-w-4xl w-full"
-          >
-            {/* Decorative Header - Always hidden on mobile, always shown on desktop */}
-            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 hidden sm:flex items-center gap-3 text-white/40">
-              <BrainCircuit className="w-6 h-6" />
-              <span className="text-sm font-bold tracking-[0.3em] uppercase">Enterprise Agentic Platform</span>
+                    <Link
+                        href="/quiz"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary text-white font-bold rounded-xl hover:shadow-lg hover:shadow-cosmic-primary/25 transition-all duration-300 hover:scale-105"
+                    >
+                        Try Quizzly.ai Now
+                        <ArrowRight className="w-5 h-5" />
+                    </Link>
+                </motion.div>
+
+                {/* Process Steps */}
+                <motion.div
+                    id="how-it-works"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="mb-24"
+                >
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black mb-4">
+                            How It <span className="text-gradient">Works</span>
+                        </h2>
+                        <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+                            Three simple steps to transform any topic into an engaging learning experience
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                        {processSteps.map((step, index) => (
+                            <motion.div
+                                key={step.number}
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 + index * 0.2 }}
+                                className="relative"
+                            >
+                                {/* Connection Line */}
+                                {index < processSteps.length - 1 && (
+                                    <div className="hidden lg:block absolute top-20 left-full w-12 h-0.5 bg-gradient-to-r from-white/20 to-transparent z-0" />
+                                )}
+
+                                <div className="glass-card p-8 rounded-2xl hover:scale-105 transition-all duration-300 relative z-10">
+                                    {/* Step Number */}
+                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${step.color} flex items-center justify-center mb-6 mx-auto`}>
+                                        <span className="text-2xl font-black text-white">{step.number}</span>
+                                    </div>
+
+                                    {/* Icon */}
+                                    <div className="flex justify-center mb-4">
+                                        <step.icon className="w-12 h-12 text-cosmic-primary" />
+                                    </div>
+
+                                    {/* Content */}
+                                    <h3 className="text-2xl font-bold mb-3 text-center">{step.title}</h3>
+                                    <p className="text-text-secondary text-center mb-6 leading-relaxed">
+                                        {step.description}
+                                    </p>
+
+                                    {/* Details */}
+                                    <ul className="space-y-2">
+                                        {step.details.map((detail, detailIndex) => (
+                                            <li key={detailIndex} className="flex items-center text-sm text-text-secondary">
+                                                <CheckCircle className="w-4 h-4 text-cosmic-primary mr-2 flex-shrink-0" />
+                                                {detail}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Technology Stack */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="mb-24"
+                >
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black mb-4">
+                            Powered by <span className="text-gradient">Advanced AI</span>
+                        </h2>
+                        <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+                            Built with cutting-edge technology to deliver the best learning experience
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {techStack.map((tech, index) => (
+                            <motion.div
+                                key={tech.name}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 1 + index * 0.1 }}
+                                className="glass-card p-6 rounded-xl text-center hover:scale-105 transition-all duration-300"
+                            >
+                                <tech.icon className="w-10 h-10 text-cosmic-primary mx-auto mb-4" />
+                                <h3 className="font-bold mb-2">{tech.name}</h3>
+                                <p className="text-sm text-text-secondary">{tech.description}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Why Quizzly Works */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2 }}
+                    className="mb-24"
+                >
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black mb-4">
+                            Why <span className="text-gradient">Quizzly.ai</span> Works
+                        </h2>
+                        <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+                            Combining AI intelligence with proven educational methodologies
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {features.map((feature, index) => (
+                            <motion.div
+                                key={feature.title}
+                                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1.4 + index * 0.1 }}
+                                className="flex items-start space-x-4 glass-card p-6 rounded-xl hover:scale-105 transition-all duration-300"
+                            >
+                                <div className="flex-shrink-0">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary rounded-xl flex items-center justify-center">
+                                        <feature.icon className="w-6 h-6 text-white" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                                    <p className="text-text-secondary leading-relaxed">{feature.description}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Call to Action */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.6 }}
+                    className="text-center"
+                >
+                    <div className="glass-card p-12 rounded-2xl max-w-3xl mx-auto">
+                        <Lightbulb className="w-16 h-16 text-cosmic-accent mx-auto mb-6 animate-pulse" />
+                        <h2 className="text-3xl md:text-4xl font-black mb-4">
+                            Ready to Learn Smarter?
+                        </h2>
+                        <p className="text-xl text-text-secondary mb-8 leading-relaxed">
+                            Join thousands of learners who are already using AI to master new topics faster and more effectively.
+                        </p>
+                        <Link
+                            href="/quiz"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary text-white font-bold rounded-xl hover:shadow-lg hover:shadow-cosmic-primary/25 transition-all duration-300 hover:scale-105"
+                        >
+                            Start Your First Quiz
+                            <ArrowRight className="w-5 h-5" />
+                        </Link>
+                    </div>
+                </motion.div>
             </div>
-
-            <div className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-cosmic-accent text-sm font-bold">
-              <Sparkles className="w-4 h-4" />
-              Powered by Google Gemini ADK
-            </div>
-
-            <h1 className="font-black mb-6 tracking-tight text-4xl sm:text-6xl lg:text-7xl">
-              Master Any <span className="text-cosmic-primary">Topic</span>.
-            </h1>
-            <p className="text-white/60 leading-relaxed text-base sm:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto">
-              Transform any topic into interactive quizzes in seconds. 
-              AI-powered learning that adapts to you, making education more effective and engaging.
-            </p>
-
-            <div className="relative group mx-auto w-full max-w-md">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-              <div className="relative">
-                {/* Mobile Layout - Always hidden on desktop */}
-                <div className="sm:hidden space-y-4">
-                  <input
-                    type="text"
-                    placeholder="E.g. Quantum Physics, Web APIs, History of Rome"
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    className="w-full bg-cosmic-bg/80 backdrop-blur-3xl border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-cosmic-primary/50 transition-all text-lg"
-                  />
-                  <button
-                    onClick={startQuiz}
-                    disabled={!topic || loading}
-                    className="w-full py-4 px-6 bg-cosmic-primary rounded-xl text-white font-bold 
-                             hover:bg-cosmic-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed
-                             flex items-center justify-center gap-2"
-                  >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowRight className="w-5 h-5" />}
-                    {loading ? 'Generating Quiz...' : 'Start Quiz'}
-                  </button>
-                </div>
-
-                {/* Desktop Layout - Always hidden on mobile */}
-                <div className="hidden sm:flex items-center">
-                  <Search className="absolute left-6 w-5 h-5 text-white/30 z-10" />
-                  <input
-                    type="text"
-                    placeholder="E.g. Quantum Physics, Web APIs, History of Rome"
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && startQuiz()}
-                    className="w-full bg-cosmic-bg/80 backdrop-blur-3xl border border-white/10 rounded-2xl py-6 pl-16 pr-32 focus:outline-none focus:border-cosmic-primary/50 transition-all text-lg"
-                  />
-                  <button
-                    onClick={startQuiz}
-                    disabled={!topic || loading}
-                    className="absolute right-3 py-3 px-6 bg-cosmic-primary rounded-xl text-white font-bold 
-                             hover:bg-cosmic-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed
-                             flex items-center gap-2"
-                  >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <ArrowRight className="w-5 h-5" />}
-                    Go
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-sm text-text-muted mb-4">Popular topics to try:</p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['Machine Learning', 'Ancient Rome', 'Quantum Physics', 'Web Development', 'Psychology'].map((example) => (
-                  <button
-                    key={example}
-                    onClick={() => setTopic(example)}
-                    className="px-3 py-1 text-xs bg-cosmic-surface/50 hover:bg-cosmic-surface text-text-secondary hover:text-white rounded-full transition-all duration-200"
-                  >
-                    {example}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {state === 'QUIZ' && sessionId && (
-          <QuizRoom key="quiz" sessionId={sessionId} onComplete={handleQuizComplete} />
-        )}
-
-        {state === 'FINALIZE' && sessionId && (
-          <FinalizeForm key="finalize" sessionId={sessionId} onResult={handleFinalResult} />
-        )}
-
-        {state === 'RESULT' && result && (
-          <ResultView key="result" result={result} onReset={resetAll} />
-        )}
-      </AnimatePresence>
-    </main>
-  );
+        </div>
+    );
 }

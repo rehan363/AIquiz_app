@@ -13,35 +13,26 @@ const Footer = () => {
       title: 'Platform',
       links: [
         { href: '/', label: 'Home' },
-        { href: '/how-it-works', label: 'How It Works' },
+        { href: '/#how-it-works', label: 'How It Works' },
         { href: '/faq', label: 'FAQ' },
         { href: '/about', label: 'About' },
-      ],
-    },
-    {
-      title: 'Resources',
-      links: [
-        { href: '/faq#ai-generation', label: 'AI & Quiz Generation' },
-        { href: '/faq#quiz-experience', label: 'Quiz Experience' },
-        { href: '/faq#technical', label: 'Technical Support' },
-        { href: '/faq#learning-tips', label: 'Learning Tips' },
       ],
     },
   ];
 
   const socialLinks = [
     {
-      href: 'https://github.com/rehanahmed',
+      href: 'https://github.com/rehan363',
       icon: Github,
       label: 'GitHub',
     },
     {
-      href: 'https://linkedin.com/in/rehanahmed',
+      href: 'https://www.linkedin.com/in/rehan-ahmed313/',
       icon: Linkedin,
       label: 'LinkedIn',
     },
     {
-      href: 'mailto:rehan@quizzly.ai',
+      href: 'mailto:rehan007313@gmail.com',
       icon: Mail,
       label: 'Email',
     },
@@ -51,9 +42,9 @@ const Footer = () => {
     <footer className="relative mt-24 border-t border-white/10">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-cosmic-surface/50 to-transparent pointer-events-none" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <motion.div
@@ -68,7 +59,7 @@ const Footer = () => {
                 <p className="text-sm text-text-muted">AI-Powered Learning Platform</p>
               </div>
             </motion.div>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +67,7 @@ const Footer = () => {
               transition={{ delay: 0.1 }}
               className="text-text-secondary mb-6 max-w-md leading-relaxed"
             >
-              Transform any topic into interactive quizzes with AI. Learn smarter, not harder 
+              Transform any topic into interactive quizzes with AI. Learn smarter, not harder
               with personalized quiz generation powered by cutting-edge artificial intelligence.
             </motion.p>
 
@@ -91,14 +82,14 @@ const Footer = () => {
               <span className="text-text-muted">Made with</span>
               <Heart className="w-4 h-4 text-red-500 animate-pulse" />
               <span className="text-text-muted">by</span>
-              <Link 
-                href="/about" 
+              <Link
+                href="/about"
                 className="text-cosmic-primary hover:text-cosmic-primary-light font-semibold transition-colors"
               >
                 Rehan Ahmed
               </Link>
             </motion.div>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

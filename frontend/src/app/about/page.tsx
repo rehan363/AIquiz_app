@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  User, 
-  Heart, 
-  BrainCircuit, 
+import {
+  User,
+  Heart,
+  BrainCircuit,
   ArrowRight,
   Target,
   Zap,
@@ -117,9 +117,9 @@ export default function AboutPage() {
           <h1 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
             About <span className="text-gradient">Quizzly.ai</span>
           </h1>
-          
+
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Democratizing personalized education through AI-powered learning experiences. 
+            Democratizing personalized education through AI-powered learning experiences.
             Built with passion for learners everywhere.
           </p>
         </motion.div>
@@ -145,15 +145,15 @@ export default function AboutPage() {
                   <User className="w-16 h-16 text-white" />
                 </div>
               </div>
-              
+
               {/* Content */}
               <div className="flex-1 text-center lg:text-left">
                 <h3 className="text-3xl font-bold mb-2">Rehan Ahmed</h3>
                 <p className="text-cosmic-primary font-semibold text-lg mb-6">Agentic AI Developer</p>
-                
+
                 <p className="text-text-secondary leading-relaxed mb-8 text-lg">
-                  Passionate about democratizing education through AI-powered learning experiences. 
-                  Quizzly.ai represents the future of personalized learning - where artificial intelligence 
+                  Passionate about democratizing education through AI-powered learning experiences.
+                  Quizzly.ai represents the future of personalized learning - where artificial intelligence
                   adapts to each learner's needs, making education more effective and engaging.
                 </p>
 
@@ -206,8 +206,8 @@ export default function AboutPage() {
               <Target className="w-12 h-12 text-cosmic-primary mb-6" />
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
               <p className="text-text-secondary leading-relaxed">
-                To transform how people learn by creating intelligent, adaptive quiz experiences 
-                that help master any topic. Every learner deserves personalized education that 
+                To transform how people learn by creating intelligent, adaptive quiz experiences
+                that help master any topic. Every learner deserves personalized education that
                 adapts to their pace and style, making knowledge accessible and engaging for everyone.
               </p>
             </div>
@@ -217,9 +217,9 @@ export default function AboutPage() {
               <BookOpen className="w-12 h-12 text-cosmic-secondary mb-6" />
               <h3 className="text-2xl font-bold mb-4">The Story</h3>
               <p className="text-text-secondary leading-relaxed">
-                Founded in 2024 with a vision to revolutionize learning through AI. 
-                Combining cutting-edge artificial intelligence with proven pedagogical methods, 
-                Quizzly.ai was born from the belief that personalized education should be 
+                Founded in 2024 with a vision to revolutionize learning through AI.
+                Combining cutting-edge artificial intelligence with proven pedagogical methods,
+                Quizzly.ai was born from the belief that personalized education should be
                 accessible to everyone, anywhere, at any time.
               </p>
             </div>
@@ -346,40 +346,7 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8 }}
-          className="text-center"
-        >
-          <div className="glass-card p-12 rounded-2xl max-w-3xl mx-auto">
-            <Sparkles className="w-16 h-16 text-cosmic-accent mx-auto mb-6 animate-pulse" />
-            <h2 className="text-3xl md:text-4xl font-black mb-4">
-              Ready to Transform Your Learning?
-            </h2>
-            <p className="text-xl text-text-secondary mb-8 leading-relaxed">
-              Join the AI-powered learning revolution. Start creating personalized quizzes 
-              and discover a smarter way to master any topic.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary text-white font-bold rounded-xl hover:shadow-lg hover:shadow-cosmic-primary/25 transition-all duration-300 hover:scale-105"
-              >
-                Start Learning Now
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="inline-flex items-center gap-2 px-8 py-4 glass-panel text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300"
-              >
-                Learn How It Works
-                <BrainCircuit className="w-5 h-5" />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+
       </div>
     </div>
   );

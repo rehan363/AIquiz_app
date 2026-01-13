@@ -13,7 +13,6 @@ const Navigation = () => {
 
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/how-it-works', label: 'How It Works' },
     { href: '/faq', label: 'FAQ' },
     { href: '/about', label: 'About' },
   ];
@@ -37,9 +36,8 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass-nav shadow-lg' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-nav shadow-lg' : 'bg-transparent'
+        }`}
       id="main-navigation"
     >
       {/* Skip Links */}
@@ -71,19 +69,18 @@ const Navigation = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${
-                  pathname === item.href
-                    ? 'text-cosmic-primary active'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
+                className={`nav-link px-3 py-2 text-sm font-medium transition-colors ${pathname === item.href
+                  ? 'text-cosmic-primary active'
+                  : 'text-text-secondary hover:text-text-primary'
+                  }`}
               >
                 {item.label}
               </Link>
             ))}
-            
+
             {/* CTA Button */}
             <Link
-              href="/"
+              href="/quiz"
               className="ml-4 px-6 py-2 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary 
                        text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cosmic-primary/25 
                        transition-all duration-300 hover:scale-105"
@@ -118,7 +115,7 @@ const Navigation = () => {
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
               onClick={closeMenu}
             />
-            
+
             {/* Mobile Menu Drawer */}
             <motion.div
               initial={{ x: '100%' }}
@@ -153,17 +150,16 @@ const Navigation = () => {
                     <Link
                       href={item.href}
                       onClick={closeMenu}
-                      className={`block px-4 py-4 rounded-xl text-base font-medium transition-all min-h-[48px] flex items-center ${
-                        pathname === item.href
-                          ? 'bg-cosmic-primary/20 text-cosmic-primary border border-cosmic-primary/30'
-                          : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
-                      }`}
+                      className={`block px-4 py-4 rounded-xl text-base font-medium transition-all min-h-[48px] flex items-center ${pathname === item.href
+                        ? 'bg-cosmic-primary/20 text-cosmic-primary border border-cosmic-primary/30'
+                        : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
+                        }`}
                     >
                       {item.label}
                     </Link>
                   </motion.div>
                 ))}
-                
+
                 {/* Mobile CTA */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
@@ -172,7 +168,7 @@ const Navigation = () => {
                   className="pt-4 border-t border-white/10 mt-4"
                 >
                   <Link
-                    href="/"
+                    href="/quiz"
                     onClick={closeMenu}
                     className="block w-full py-4 px-6 bg-gradient-to-r from-cosmic-primary to-cosmic-secondary 
                              text-white font-bold rounded-xl hover:shadow-lg hover:shadow-cosmic-primary/25 
