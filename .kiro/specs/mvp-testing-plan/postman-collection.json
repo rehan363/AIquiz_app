@@ -1,0 +1,320 @@
+{
+  "info": {
+    "name": "Agentic Quiz Platform - MVP Testing",
+    "description": "Complete API testing collection for MVP validation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Generate Quiz",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"topic\": \"Python Programming\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/generate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "generate"]
+        },
+        "description": "Generate a new quiz on a specific topic. Returns session_id for subsequent requests."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Next Question",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/quiz/next?session_id=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "next"],
+          "query": [
+            {
+              "key": "session_id",
+              "value": "1",
+              "description": "Replace with actual session_id from Step 1"
+            }
+          ]
+        },
+        "description": "Get the next unanswered question for a session. Update session_id from Step 1 response."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Submit Correct Answer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"question_id\": 1,\n  \"choice_id\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/submit",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "submit"]
+        },
+        "description": "Submit an answer to a question. Update IDs from previous responses."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Submit Incorrect Answer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"question_id\": 2,\n  \"choice_id\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/submit",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "submit"]
+        },
+        "description": "Submit an incorrect answer to test error handling and AI explanation."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Get Question 3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/quiz/next?session_id=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "next"],
+          "query": [
+            {
+              "key": "session_id",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "Get question 3"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Submit Answer to Question 3",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"question_id\": 3,\n  \"choice_id\": 9\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/submit",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "submit"]
+        },
+        "description": "Submit answer to question 3"
+      },
+      "response": []
+    },
+    {
+      "name": "7. Get Question 4",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/quiz/next?session_id=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "next"],
+          "query": [
+            {
+              "key": "session_id",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "Get question 4"
+      },
+      "response": []
+    },
+    {
+      "name": "8. Submit Answer to Question 4",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"question_id\": 4,\n  \"choice_id\": 13\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/submit",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "submit"]
+        },
+        "description": "Submit answer to question 4"
+      },
+      "response": []
+    },
+    {
+      "name": "9. Get Question 5",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/quiz/next?session_id=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "next"],
+          "query": [
+            {
+              "key": "session_id",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "Get question 5 (last question)"
+      },
+      "response": []
+    },
+    {
+      "name": "10. Submit Answer to Question 5",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"question_id\": 5,\n  \"choice_id\": 17\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/submit",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "submit"]
+        },
+        "description": "Submit answer to question 5"
+      },
+      "response": []
+    },
+    {
+      "name": "11. Finalize Quiz",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"user_name\": \"Test User\",\n  \"user_email\": \"test@example.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/finalize",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "finalize"]
+        },
+        "description": "Finalize the quiz and get results"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Invalid Session",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/quiz/next?session_id=99999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "next"],
+          "query": [
+            {
+              "key": "session_id",
+              "value": "99999"
+            }
+          ]
+        },
+        "description": "Test error handling with invalid session_id. Should return 404."
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Invalid Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": 1,\n  \"user_name\": \"Test\",\n  \"user_email\": \"invalid-email\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/quiz/finalize",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["quiz", "finalize"]
+        },
+        "description": "Test validation with invalid email. Should return 422."
+      },
+      "response": []
+    }
+  ]
+}

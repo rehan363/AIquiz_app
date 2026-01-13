@@ -1,21 +1,35 @@
 [project]
-name = "04fastapi-with-postgresql"
+name = "agentic-quiz-platform"
 version = "0.1.0"
-description = "Add your description here"
+description = "Professional Agentic Quiz Platform using Google ADK"
 readme = "README.md"
 authors = [
     { name = "rehan363", email = "rehan007313@gmail.com" }
 ]
 requires-python = ">=3.12"
 dependencies = [
+    "alembic>=1.17.2",
     "fastapi>=0.128.0",
+    "google-adk>=1.18.0",
+    "google-generativeai>=0.8.6",
+    "httpx>=0.28.1",
+    "litellm>=1.57.11",
     "psycopg2-binary>=2.9.11",
+    "pydantic[email]>=2.12.5",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
+    "python-dotenv>=1.2.1",
     "sqlalchemy>=2.0.45",
+    "uvicorn>=0.40.0",
 ]
 
 [project.scripts]
-04fastapi-with-postgresql = "04fastapi_with_postgresql:main"
+quiz-platform = "app.main:app"
 
-[build-system]
-requires = ["uv_build>=0.9.18,<0.10.0"]
-build-backend = "uv_build"
+[tool.uv]
+package = false
+dev-dependencies = []
+
+[tool.uv.sources]
+app = { path = "src/app" }
+
